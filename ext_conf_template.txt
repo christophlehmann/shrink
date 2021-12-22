@@ -1,0 +1,2 @@
+# cat=Shrink/; type=string; label=Preserve comments: Preserve comments that start with (comma separated list)
+preserveCommentsStartingWith =

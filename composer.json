@@ -1,0 +1,43 @@
+{
+    "name": "christophlehmann/shrink",
+    "type": "typo3-cms-extension",
+    "description": "Compress HTML output",
+    "license": "GPL-2.0+",
+    "homepage": "https://github.com/christophlehmann/shrink",
+    "keywords": ["TYPO3 CMS", "compression"],
+    "authors": [
+        {
+            "name": "Christoph Lehmann",
+            "role": "Developer",
+            "email": "post@christoplehmann.eu"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^10.4 || ^11.5",
+        "wyrihaximus/html-compress": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lemming\\Shrink\\": "Classes"
+        }
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web",
+            "extension-key": "shrink"
+        }
+    },
+    "replace": {
+        "christophlehmann/shrink": "*"
+    },
+    "scripts": {
+        "prepare-release": [
+            "rm -rf .github"
+        ]
+    }
+}
