@@ -1,2 +1,4 @@
-# cat=Shrink/; type=string; label=Preserve comments: Preserve comments that start with (comma separated list)
+# cat=Shrink/Basic; type=string; label=Preserve comments: Preserve comments that start with (comma separated list)
 preserveCommentsStartingWith =
+# cat=Shrink/Basic; type=bool; label=Enable
+enable = 1

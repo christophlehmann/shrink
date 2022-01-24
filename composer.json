@@ -32,9 +32,6 @@
             "extension-key": "shrink"
         }
     },
-    "replace": {
-        "christophlehmann/shrink": "*"
-    },
     "scripts": {
         "prepare-release": [
             "rm -rf .github"

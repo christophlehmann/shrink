@@ -18,7 +18,11 @@ class ShrinkOutput implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        if ($this->isHtmlResponse($response)) {
+
+        if (
+            $this->isHtmlResponse($response) &&
+            (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('shrink', 'enable') === true
+        ) {
             $stream = $response->getBody();
             $stream->rewind();
             $content = $stream->getContents();
@@ -34,14 +38,14 @@ class ShrinkOutput implements MiddlewareInterface
         $htmlMin = new HtmlMin();
         $htmlMin->setSpecialHtmlComments($this->getSpecialCommentStarts(), []);
         $parser = Factory::constructSmallest()->withHtmlMin($htmlMin);
-        $html = $parser->compress($html);
 
-        return $html;
+        return $parser->compress($html);
     }
 
     protected function getSpecialCommentStarts(): array
     {
-        $preserveCommentsStartingWith = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('shrink', 'preserveCommentsStartingWith');
+        $preserveCommentsStartingWith = GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            ->get('shrink', 'preserveCommentsStartingWith');
         $commentStarts = GeneralUtility::trimExplode(',', $preserveCommentsStartingWith, true);
         $commentStarts[] = 'TYPO3SEARCH';
 
